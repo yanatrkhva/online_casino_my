@@ -1,26 +1,4 @@
 
-// create a function that compares cards by rank and color 
-// Function 1 - comparing cards color:
-// - if card 1 color = power card color return true, if not - false   
-// - if card 2 color = power card color return true, if not - false 
-// - if card 1 and card 2 = power card color return both
-// ** In main function (if one of the cards = true): 
-// - if card 1 color = true and card 2 color = false => return card 1 is stronger 
-// - if card 1 color = false and card 2 color = true => return card 2 is stronger 
-// Function 2 - comparing card rank:
-// - ex: card_rank = card[0].slice(-1):
-// - write all possible combinations 
-// - return strongest card
-// ** In main function (both cards = true)
-// - if card 1 color = true and card 2 color = true 
-// - invoking new function compare_ranks_only 
-// ** In main function (both cards = false)
-// return error message 
-
-
-// add case if both cards are not power cards color 
-// test fully functions :)
-
 
 const deck_of_cards = [
     "6H", "7H", "8H", "9H", "TH", "JH", "QH", "KH", "AH",
@@ -29,10 +7,9 @@ const deck_of_cards = [
     "6S", "7S", "8S", "9S", "TS", "JS", "QS", "KS", "AS"
 ];
 
-let power_card = "8A";
-let card_1 = "KS";
-let card_2 = "KC";
-
+let power_card = "6C";
+// let card_1 = "KS";
+// let card_2 = "KC";
 
 let manual_player_hand = ["TH", "JD", "AC", "QH", "AD", "JS"];
 let auto_player_hand = ["7D", "8D", "8C", "QC", "JH", "QS"];
@@ -147,13 +124,33 @@ function define_stronger_card(card_1, card_2, power_card) {
     }
 }
 
-define_stronger_card(card_1, card_2, power_card);
+// define_stronger_card(card_1, card_2, power_card);
+
+function compare_hand_cards_with_power_color(hand_cards, power_card) {
+    let power_card_color = power_card[1].slice(-1);
+    let hand_power_cards = [];
+
+    for (let card of hand_cards) {
+        let hand_card_color = card[1].slice(-1);   
+        
+        if (hand_card_color === power_card_color) {
+            hand_power_cards.push(card);
+        }
+
+    }
+    return hand_power_cards;
+}
 
 
 function determine_player_who_starts(manual_player_hand, auto_player_hand, power_card) {
     
-    
+    let manual_player_power_cards = compare_hand_cards_with_power_color(manual_player_hand, power_card);
+    console.log(`Manual player power cards: ${manual_player_power_cards}`);
+
+    let auto_player_power_cards = compare_hand_cards_with_power_color(auto_player_hand, power_card);
+    console.log(`Auto player power cards: ${[auto_player_power_cards]}`);   
+
     
 }
 
-determine_player_who_starts(power_card);
+determine_player_who_starts(manual_player_hand, auto_player_hand, power_card);

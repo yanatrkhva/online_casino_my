@@ -1,3 +1,7 @@
+# Online casino 
+Online casino with Durak game developed for educational purposes.
+
+
 
 # notifications
 generate_welcome_message(player, player_balance)
